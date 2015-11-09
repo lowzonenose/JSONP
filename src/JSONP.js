@@ -159,13 +159,24 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             
             // script
             var scriptu;
+            var scripto;
+                scripto = document .getElementById("results");
+                
             scriptu = document.createElement("script");
             scriptu.setAttribute("type", "text/javascript");
             scriptu.setAttribute("src", options.url);
             scriptu.setAttribute("charset", "UTF-8");
             scriptu.setAttribute("id", "results");
-
-            document.body.appendChild(scriptu);
+            scriptu.setAttribute("async", "true"); // FIXME async ?
+            // head ou body ou autres ?
+            var node = document.body || document.documentElement || document.getElementsByTagName('head')[0];
+            if (scripto == null) {
+                node.appendChild(scriptu);
+            }
+            else {
+                // s'il existe déjà, on le remplace !
+                node.replaceChild(scriptu, scripto);
+            }
         }
     };
 

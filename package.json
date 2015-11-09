@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lowzonenose/jsonp.git"
+    "url": "git+https://github.com/lowzonenose/JSONP.git"
   },
   "keywords": [
     "jsonp"
@@ -21,9 +21,9 @@
   "author": "lowzonenose",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/lowzonenose/jsonp/issues"
+    "url": "https://github.com/lowzonenose/JSONP/issues"
   },
-  "homepage": "https://github.com/lowzonenose/jsonp#readme",
+  "homepage": "https://github.com/lowzonenose/JSONP#readme",
   "dependencies": {
     "amdclean": "^2.7.0",
     "chai": "^3.4.1",

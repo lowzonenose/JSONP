@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../lib/require.js"></script>
+        <script>
+            /* global requirejs */
+            requirejs.config({
+                'baseUrl' : "../src/",
+                'paths': {
+                    // lib external
+                    'log4js' : "../lib/woodman/woodman-amd",
+                    'promise': '../lib/promise',
+                    'sinon'  : "../node_modules/sinon/lib/sinon",
+                    // config du logger
+                    "logger-cfg" : "Utils/Logger.cfg"
+                }
+            });
+
+            requirejs(['JSONP'], 
+                function (JSONP) {
+                    
+                    var options = {
+                        url       : '',
+                        timeOut   : 10000,
+                        onResponse: function (response) {
+                            console.log('onResponse', response);
+                        },
+                        onTimeOut : function () {
+                            console.log("Time out !");
+                        }
+                    };
+                    
+
+                    var suites = {
+
+                        onSuiteTest0 : function  () {
+                            // cas où il faut construire l'url : http://demo9330242.mockable.io/test.json?callback=myCallback
+                            // appel de myCallback()...
+                            options.url = "http://demo9330242.mockable.io/myCallback.json";
+                            options.callbackName = "myCallback";
+                            JSONP.call(options);
+    
+                        },
+                        
+                        onSuiteTest1 : function  () {
+                            // OK cas où il faut ajouter la fonction par defaut : http://demo9330242.mockable.io/test.json?callback=callback
+                            // appel de onResponse()...
+                            options.url = "http://demo9330242.mockable.io/callback.json?callback=";
+                            delete options.callbackName;
+                            JSONP.call(options);
+    
+                        },
+                        
+                        onSuiteTest2 : function  () {
+                            // OK cas où on ajoute la fonction du client definie dans 'callbackName' : 
+                            // http://demo9330242.mockable.io/test.json?callback=myCallback
+                            // appel de myCallback()...
+                            options.url = "http://demo9330242.mockable.io/myCallback.json?callback=";
+                            options.callbackName = "myCallback";
+                            JSONP.call(options);
+       
+                        },
+                        
+                        onSuiteTest3 : function  () {
+                            // OK cas où la fonction est déjà renseignée dans l'url, et donc, on ne prend pas celle renseignée
+                            // appel de myCallback()...
+                            options.url = "http://demo9330242.mockable.io/myCallback.json?callback=myCallback";
+                            options.callbackName = "anotherMyCallback"; // bidon
+                            JSONP.call(options);
+                            
+                        },
+                        
+                        onSuiteTest4 : function  () {
+                            // ON n'EN VEUT PAS !!! ON NE PERMET PAS CE TYPE DE TEST !!!
+                            // OK cas où il faut ajouter la fonction par defaut : http://demo9330242.mockable.io/test.json?callback=callback
+                            // appel de onResponse()..., par defaut
+                            options.url = "http://demo9330242.mockable.io/callback.json?callback=";
+                            delete options.callbackName;
+                            delete options.onResponse;
+                            JSONP.call(options);
+                            
+                        },
+                        
+                        onSuiteTest5 : function  () {
+                            // OK cas où il faut ajouter la fonction par defaut : http://demo9330242.mockable.io/test.json?callback=callback
+                            // appel de onResponse()...
+                            options.url = "http://demo9330242.mockable.io/callback.json";
+                            delete options.callbackName;
+                            options.onResponse = function (response) {
+                                console.log('onResponse', response);
+                            };
+                            JSONP.call(options);
+    
+                        }
+                    };
+                    
+                    // suites.onSuiteTest0();
+                    // suites.onSuiteTest1();
+                    suites.onSuiteTest2();
+                    // suites.onSuiteTest3(); 
+                    // suites.onSuiteTest4();
+                    // suites.onSuiteTest5();
+                     
+                   
+            });
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation des modules natifs AMD sur les protocoles</h1>
+        <p>exemple mock avec Mockable sur <a href="https://www.mockable.io/">https://www.mockable.io/</a></p>
+        <span>(Ouvrir la console)</span>
+    </body>
+    <script>
+        var myCallback = function (response) {
+            console.log('myCallback', response);
+        };
+    </script>
+</html>

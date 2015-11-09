@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <script src="../dist/umd/debug/JSONP.js"></script>
+        <script>
+            var callService = function() {
+                var options = { 
+                    url : 'http://demo9330242.mockable.io/myCallback.json', 
+                    timeOut : 10000, 
+                    onResponse: function (response) { 
+                        console.log('onResponse', response); 
+                    }, 
+                    onTimeOut : function () { 
+                        console.log("Time out !"); 
+                    } 
+                };
+    
+                // cas où il faut construire l'url : http://demo9330242.mockable.io/test.json?callback=myCallback 
+                // appel de myCallback()...
+                options.callbackName = "myCallback"; 
+                JSONP.call(options);
+            };
+        </script>
+    </head>
+    
+    <body onload="callService()">
+        <h1>Utilisation des modules natifs AMD sur les protocoles</h1>
+        <p>exemple mock avec Mockable sur
+            <a href="https://www.mockable.io/">https://www.mockable.io/</a>
+        </p>
+        <span>(Ouvrir la console)</span>
+    </body>
+    <script>
+        var myCallback = function (response) {
+            console.log('myCallback', response);
+        };
+    </script>
+
+</html>

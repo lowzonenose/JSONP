@@ -1,6 +1,6 @@
 /**
- * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail (cf. {@link https://github.com/sobstel/jsonp.js}).
- * 
+ * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail.
+ * Réference : "Head First HTML5 Programming: Building Web Apps with JavaScript"
  * @module JSONP
  * @alias Gp.Protocols.JSONP
  */

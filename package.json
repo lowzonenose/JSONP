@@ -9,7 +9,10 @@
   "scripts": {
     "minify": "gulp --minify",
     "build": "gulp",
-    "test": "gulp test"
+    "test": "mocha --ui exports --reporter spec",
+    "monitor": "mocha --ui exports --reporter min --watch",
+    "debugtest": "mocha --debug-brk --ui exports --reporter spec",
+    "coverage": "mochacoverage"
   },
   "repository": {
     "type": "git",
@@ -47,5 +50,8 @@
     "shelljs": "^0.5.3",
     "should": "^7.1.1",
     "sinon": "^1.17.2"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.4"
   }
 }
